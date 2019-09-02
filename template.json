@@ -1,0 +1,27 @@
+{
+  "variables": {
+    "aws_base_ami_id": "ami-0cddf7994f6cbae36"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ssh_username": "ubuntu",
+      "source_ami": "{{user `aws_base_ami_id`}}",
+      "instance_type": "t2.micro",
+      "ami_name": "ubuntu-redis-{{isotime \"20060102\"}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash {{.Path}}",
+      "scripts": [
+        "scripts/redis_install.sh",
+        "scripts/cleanup_final.sh"
+      ],
+      "environment_vars": [
+        "DEBIAN_FRONTEND=noninteractive"
+      ],
+      "type": "shell"
+    }
+  ]
+}
