@@ -13,8 +13,8 @@ platforms:
 - name: ubuntu-redis
   driver:
     image_search:
-      owner-id: "045273941545"
-      name: "ubuntu-redis-*"
+      owner-id: "938620692197"
+      name: "slav-ubuntu-redis-*"
 
 verifier:
   name: inspec
